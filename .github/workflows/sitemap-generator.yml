@@ -1,14 +1,16 @@
 name: Generate Sitemap
 
 on:
+  workflow_dispatch:      # agar bisa dijalankan manual dari tab "Actions"
   push:
-    branches: [main]
+    branches: [main]      # tetap jalan kalau ada push ke main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # ✅ WAJIB agar bisa commit & push
+      contents: write     # WAJIB agar bisa push commit ke repo
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -16,12 +18,12 @@ jobs:
       - name: Generate sitemap
         uses: cicirello/generate-sitemap@v1
         with:
-          base-url: "https://resta-travel.github.io"
+          base-url: "https://resta-travel.github.io"  # pastikan ini cocok dengan GitHub Pages kamu
 
       - name: Commit and push sitemap
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add sitemap.xml
-          git commit -m "Generate sitemap.xml" || echo "No changes to commit"
+          git diff --cached --quiet || git commit -m "Update sitemap.xml"
           git push
