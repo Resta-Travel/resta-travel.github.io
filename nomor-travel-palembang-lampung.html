@@ -4,10 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Resta Travel - Travel Palembang Lampung dan Palembang Jakarta terbaik dengan layanan door to door dan armada nyaman.">
-  <meta name="keywords" content="nomor travel palembang lampung, travel palembang lampung terpercaya, travel lampung palembang, pemesanan travel lampung">
+  <meta name="keywords" content="travel palembang lampung, travel lampung palembang, travel palembang jakarta, travel lampung jakarta">
   <meta name="author" content="Resta Travel">
-  <title>Nomor Travel Palembang Lampung | Resta Travel</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <title>Resta Travel | Travel Palembang Lampung & Jakarta</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -102,26 +101,12 @@
         font-size: 14px;
       }
     }
-    article {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-    article h1, h2 {
-      color: #004b8d;
-    }
-    article a {
-      color: #25D366;
-      text-decoration: none;
-    }
   </style>
+  <meta name="google-site-verification" content="-BEScp4_VrtiUnTqyNyjCEsa16wlqmsXbMIqb_R3c6U" />
 </head>
+
 <body>
 
-<!-- Script Home -->
 <div class="form-container">
   <div class="form-header">
     <h1>Resta Travel</h1>
@@ -131,7 +116,7 @@
     <label for="nama">Nama Pemesan</label>
     <input type="text" id="nama" placeholder="Masukkan Nama Anda" required>
 
-    <label for="pickup">Titik Penjemputan</label>
+    <label for="pickup">Titik Penjemputan (tunggu hingga titik lokasi terbaca otomatis)</label>
     <input type="text" id="pickup" placeholder="Titik Jemput (otomatis / geser map)" required>
     <div id="map"></div>
 
@@ -174,10 +159,13 @@
   </form>
 </div>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
   let userLat = -2.9761;
   let userLng = 104.7754;
+
+  function isNear(a, b, range = 0.5) {
+    return Math.abs(a.lat - b.lat) < range && Math.abs(a.lng - b.lng) < range;
+  }
 
   function selectSeat(no) {
     document.getElementById('kursi').value = no;
@@ -197,53 +185,57 @@
     const lampung = { lat: -5.3971, lng: 105.2668 };
     const jakarta = { lat: -6.2088, lng: 106.8456 };
 
-    function isNear(a, b, range = 0.5) {
-      return Math.abs(a.lat - b.lat) < range && Math.abs(a.lng - b.lng) < range;
-    }
-
     let asal = "";
     if (isNear({ lat: userLat, lng: userLng }, palembang)) asal = "palembang";
     else if (isNear({ lat: userLat, lng: userLng }, lampung)) asal = "lampung";
     else if (isNear({ lat: userLat, lng: userLng }, jakarta)) asal = "jakarta";
 
     if ((asal === "palembang" && tujuan === "lampung") || (asal === "lampung" && tujuan === "palembang")) {
-      harga = kursi === 1 ? 300000 : kursi <= 4 ? 250000 : 250000;
+      harga = kursi === 1 ? 300000 : 250000;
     } else if ((asal === "palembang" && tujuan === "jakarta") || (asal === "jakarta" && tujuan === "palembang")) {
       harga = kursi === 1 ? 700000 : kursi <= 4 ? 650000 : 600000;
     } else if ((asal === "lampung" && tujuan === "jakarta") || (asal === "jakarta" && tujuan === "lampung")) {
-      harga = kursi === 1 ? 400000 : kursi <= 4 ? 350000 : 350000;
+      harga = kursi === 1 ? 400000 : 350000;
     }
 
     document.getElementById("harga").value = `Rp ${harga.toLocaleString("id-ID")}`;
   }
 
-  const map = L.map('map').setView([userLat, userLng], 13);
-  const marker = L.marker([userLat, userLng], { draggable: true }).addTo(map);
+  function initMap() {
+    const defaultPos = { lat: userLat, lng: userLng };
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 14,
+      center: defaultPos,
+    });
+    const marker = new google.maps.Marker({
+      position: defaultPos,
+      map,
+      draggable: true,
+    });
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(map);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          userLat = position.coords.latitude;
+          userLng = position.coords.longitude;
+          const pos = { lat: userLat, lng: userLng };
+          map.setCenter(pos);
+          marker.setPosition(pos);
+          document.getElementById("pickup").value = `${userLat.toFixed(6)}, ${userLng.toFixed(6)}`;
+          updateHarga();
+        },
+        () => alert("Gagal mendeteksi lokasi.")
+      );
+    }
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      userLat = position.coords.latitude;
-      userLng = position.coords.longitude;
-      map.setView([userLat, userLng], 14);
-      marker.setLatLng([userLat, userLng]);
+    marker.addListener("dragend", () => {
+      const pos = marker.getPosition();
+      userLat = pos.lat();
+      userLng = pos.lng();
       document.getElementById("pickup").value = `${userLat.toFixed(6)}, ${userLng.toFixed(6)}`;
       updateHarga();
-    }, function() {
-      alert("Gagal mendeteksi lokasi.");
     });
   }
-
-  marker.on('dragend', function (e) {
-    const pos = marker.getLatLng();
-    userLat = pos.lat;
-    userLng = pos.lng;
-    document.getElementById("pickup").value = `${pos.lat.toFixed(6)}, ${pos.lng.toFixed(6)}`;
-    updateHarga();
-  });
 
   document.getElementById("waLink").addEventListener("click", function(e) {
     const nama = document.getElementById("nama").value;
@@ -273,9 +265,10 @@
     this.href = waUrl;
   });
 </script>
-
+<script src="https://maps.gomaps.pro/maps/api/js?key=AlzaSyBfshyHHG8TGF6KiI7D8pyMf-yidzwqn_c&callback=initMap" async defer></script>
 </body>
 </html>
+
 
 
 <!-- Artikel SEO -->
