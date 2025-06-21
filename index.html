@@ -193,11 +193,11 @@
     else if (isNear({ lat: userLat, lng: userLng }, jakarta)) asal = "jakarta";
 
     if ((asal === "palembang" && tujuan === "lampung") || (asal === "lampung" && tujuan === "palembang")) {
-      harga = kursi === 1 ? 300000 : kursi <= 4 ? 250000 : 200000;
+      harga = kursi === 1 ? 300000 : kursi <= 4 ? 250000 : 250000;
     } else if ((asal === "palembang" && tujuan === "jakarta") || (asal === "jakarta" && tujuan === "palembang")) {
       harga = kursi === 1 ? 700000 : kursi <= 4 ? 650000 : 600000;
     } else if ((asal === "lampung" && tujuan === "jakarta") || (asal === "jakarta" && tujuan === "lampung")) {
-      harga = kursi === 1 ? 400000 : kursi <= 4 ? 350000 : 300000;
+      harga = kursi === 1 ? 400000 : kursi <= 4 ? 350000 : 350000;
     }
 
     document.getElementById("harga").value = `Rp ${harga.toLocaleString("id-ID")}`;
