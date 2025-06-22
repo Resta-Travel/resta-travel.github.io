@@ -104,24 +104,7 @@
   </style>
   <script>
 (async () => {
-const endpoint = "https://script.google.com/macros/s/AKfycbxwmr4fNmAU20yCYXMOHI9DFBHkZm3bu0Eu6MaQUyc/exec";
-
-const ipData = await fetch("https://ipapi.co/json").then(res => res.json());
-
-const data = {
-  ip: ipData.ip || "",
-  device: /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent) ? "Mobile" : "Desktop",
-  os: navigator.platform,
-  browser: (() => {
-    const ua = navigator.userAgent;
-    if (ua.includes("Chrome")) return "Chrome";
-    if (ua.includes("Firefox")) return "Firefox";
-    if (ua.includes("Safari")) return "Safari";
-    if (ua.includes("Edge")) return "Edge";
-    return "Unknown";
-  })(),
-  location: `${ipData.city || ''}, ${ipData.region || ''}, ${ipData.country_name || ''}`
-};
+const endpoint = "https://script.google.com/macros/s/AKfycbzQpLCWNC5D0c_NNNzyfpdKFUOPGIoIaBONRGe6XVPnLI9Uu-CSJsjGR5UDderQoDhP/exec";
 
 fetch(endpoint, {
   method: "POST",
@@ -130,6 +113,7 @@ fetch(endpoint, {
     "Content-Type": "application/json"
   }
 });
+
 
 })();
 </script>
