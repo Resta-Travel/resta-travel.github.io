@@ -104,39 +104,33 @@
   </style>
   <script>
 (async () => {
-  const endpoint = "https://script.google.com/macros/s/AKfycbxwmr4fNmAU20yCYXMOHI9DFBHkZm3bu0Eu6MaQUyc/dev";
+const endpoint = "https://script.google.com/macros/s/AKfycbxwmr4fNmAU20yCYXMOHI9DFBHkZm3bu0Eu6MaQUyc/exec";
 
-  // Dapatkan IP dan lokasi
-  const ipData = await fetch("https://ipapi.co/json").then(res => res.json());
+const ipData = await fetch("https://ipapi.co/json").then(res => res.json());
 
-
-  // Dapatkan user agent
-  const ua = navigator.userAgent;
-  let device = /Mobile|Android|iPhone|iPad/i.test(ua) ? "Mobile" : "Desktop";
-  let os = navigator.platform;
-  let browser = (() => {
+const data = {
+  ip: ipData.ip || "",
+  device: /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent) ? "Mobile" : "Desktop",
+  os: navigator.platform,
+  browser: (() => {
+    const ua = navigator.userAgent;
     if (ua.includes("Chrome")) return "Chrome";
     if (ua.includes("Firefox")) return "Firefox";
     if (ua.includes("Safari")) return "Safari";
     if (ua.includes("Edge")) return "Edge";
     return "Unknown";
-  })();
+  })(),
+  location: `${ipData.city || ''}, ${ipData.region || ''}, ${ipData.country_name || ''}`
+};
 
-  const data = {
-    ip: ipData.ipAddress || "",
-    device: device,
-    os: os,
-    browser: browser,
-    location: `${ipData.city || ''}, ${ipData.stateProv || ''}, ${ipData.countryName || ''}`
-  };
+fetch(endpoint, {
+  method: "POST",
+  body: JSON.stringify(data),
+  headers: {
+    "Content-Type": "application/json"
+  }
+});
 
-  fetch(endpoint, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
 })();
 </script>
 
