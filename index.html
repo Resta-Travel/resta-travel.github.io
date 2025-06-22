@@ -102,45 +102,6 @@
       }
     }
   </style>
-  <script>
-(async () => {
-  const endpoint = "https://script.google.com/macros/s/AKfycbzQpLCWNC5D0c_NNNzyfpdKFUOPGIoIaBONRGe6XVPnLI9Uu-CSJsjGR5UDderQoDhP/exec
-";
-
-  // Dapatkan IP dan lokasi
-  const ipData = await fetch("https://ipapi.co/json").then(res => res.json());
-
-  // Dapatkan user agent
-  const ua = navigator.userAgent;
-  let device = /Mobile|Android|iPhone|iPad/i.test(ua) ? "Mobile" : "Desktop";
-  let os = navigator.platform;
-  let browser = (() => {
-    if (ua.includes("Chrome")) return "Chrome";
-    if (ua.includes("Firefox")) return "Firefox";
-    if (ua.includes("Safari")) return "Safari";
-    if (ua.includes("Edge")) return "Edge";
-    return "Unknown";
-  })();
-
-  const data = {
-    ip: ipData.ip || "",
-    device: device,
-    os: os,
-    browser: browser,
-    location: `${ipData.city || ''}, ${ipData.stateProv || ''}, ${ipData.countryName || ''}`
-  };
-
-  fetch(endpoint, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
-})();
-</script>
-
-
   <meta name="google-site-verification" content="-BEScp4_VrtiUnTqyNyjCEsa16wlqmsXbMIqb_R3c6U" />
 </head>
 <body>
