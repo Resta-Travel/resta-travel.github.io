@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Tiket Resta Travel v13 (Fix PDF Full)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        /* CSS Reset */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; display: flex; flex-direction: column; align-items: center; padding: 20px; margin: 0; }
+        .container { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; max-width: 1100px; width: 100%; align-items: flex-start; }
+        
+        /* --- Panel Input (Kiri) --- */
+        .input-panel { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); flex: 1; min-width: 320px; }
+        h2 { margin-top: 0; color: #1e3a8a; font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; }
+        
+        .paste-area { position: relative; margin-bottom: 20px; }
+        textarea { width: 100%; height: 160px; padding: 12px; border: 2px dashed #cbd5e1; border-radius: 8px; font-size: 13px; font-family: monospace; box-sizing: border-box; resize: vertical; background: #f8fafc; }
+        textarea:focus { border-color: #1e3a8a; outline: none; background: #fff; }
+        .paste-label { position: absolute; top: -10px; left: 15px; background: white; padding: 0 5px; font-size: 12px; color: #1e3a8a; font-weight: bold; }
+        
+        .logo-upload-section { background: #eff6ff; padding: 10px; border-radius: 8px; border: 1px solid #bfdbfe; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; }
+        .logo-upload-label { font-size: 12px; font-weight: bold; color: #1e3a8a; }
+        input[type="file"] { font-size: 11px; width: 180px; }
+
+        .action-buttons { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px; }
+        .btn-group { display: flex; gap: 10px; }
+        
+        button { flex: 1; background-color: #1e3a8a; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 5px; }
+        button:hover { background-color: #1e40af; transform: translateY(-2px); }
+        
+        button.btn-parse { background-color: #3b82f6; }
+        button.download-png { background-color: #059669; }
+        button.download-pdf { background-color: #dc2626; }
+        
+        .manual-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { font-size: 11px; color: #64748b; margin-bottom: 4px; font-weight: 500; }
+        .manual-form input, .manual-form select { padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 13px; }
+        .full-width { grid-column: span 2; }
+        select#inStatus { font-weight: bold; color: #1e3a8a; background-color: #eff6ff; border: 1px solid #bfdbfe; cursor: pointer; }
+
+        /* --- Desain Tiket (Kanan) --- */
+        .ticket-wrapper { flex: 1; display: flex; justify-content: center; align-items: flex-start; min-width: 360px; padding-top: 20px; }
+        #ticket { 
+            width: 360px; 
+            background: white;
+            border-radius: 16px; 
+            overflow: hidden; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.05); 
+            position: relative;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff; 
+        }
+        
+        .ticket-header { 
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white; 
+            padding: 25px 20px; 
+            text-align: center; 
+            position: relative;
+        }
+        
+        .logo-container {
+            height: 110px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        
+        #ticketLogo {
+            max-height: 100%; 
+            max-width: 320px; 
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); 
+        }
+
+        .slogan { font-size: 12px; font-weight: 400; letter-spacing: 2px; opacity: 0.9; font-style: italic; text-transform: uppercase; margin-bottom: 8px; font-family: sans-serif; }
+        .wa-pill { 
+            background: rgba(255,255,255,0.2); 
+            display: inline-block; 
+            padding: 5px 15px; 
+            border-radius: 20px; 
+            font-size: 13px;
+            font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .ticket-body { padding: 25px; color: #333; position: relative; background: #fff; }
+        
+        .route-container { background: #eff6ff; padding: 15px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #dbeafe; }
+        .route-label { text-align: center; font-size: 11px; color: #3b82f6; font-weight: bold; letter-spacing: 1px; margin-bottom: 8px; }
+        
+        .route { display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .city-name { 
+            flex: 1; 
+            font-weight: 800; 
+            font-size: 16px; 
+            color: #1e3a8a; 
+            text-transform: uppercase;
+            text-align: center; 
+            line-height: 1.2; 
+            word-wrap: break-word; 
+        }
+        /* Tanda Strip */
+        .route-separator { font-size: 24px; font-weight: bold; color: #64748b; padding: 0 5px; }
+        
+        .info-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .info-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dotted #e2e8f0; padding-bottom: 8px; }
+        .info-label { color: #94a3b8; font-size: 12px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+        .info-value { font-weight: 700; font-size: 14px; color: #0f172a; text-align: right; }
+        .icon-label { width: 16px; text-align: center; opacity: 0.7; }
+        .small-value { font-size: 12px; max-width: 180px; line-height: 1.3; }
+
+        .total-section { margin-top: 25px; background: #ecfdf5; padding: 15px; border-radius: 12px; border: 1px dashed #10b981; text-align: center; position: relative; overflow: hidden; }
+        .total-label { color: #059669; font-size: 12px; font-weight: bold; letter-spacing: 1px; margin-bottom: 5px; }
+        .total-price { color: #047857; font-size: 24px; font-weight: 900; }
+
+        .status-stamp { 
+            position: absolute; top: 8px; right: 10px; transform: rotate(-10deg); 
+            font-size: 14px; font-weight: 900; text-transform: uppercase; 
+            border: 2px solid; padding: 4px 8px; border-radius: 6px; 
+            opacity: 0.9; pointer-events: none; z-index: 10; white-space: nowrap; 
+        }
+        .stamp-paid { color: #10b981; border-color: #10b981; background-color: white; }
+        .stamp-unpaid { color: #ef4444; border-color: #ef4444; background-color: white; }
+
+        .ticket-footer { background: #f8fafc; padding: 15px; text-align: center; font-size: 10px; color: #94a3b8; border-top: 1px solid #e2e8f0; line-height: 1.5; }
+        .notch { position: absolute; width: 24px; height: 24px; background-color: #f0f2f5; border-radius: 50%; top: 168px; z-index: 10; }
+        .notch-left { left: -12px; }
+        .notch-right { right: -12px; }
+
+        @media (max-width: 768px) {
+            .container { flex-direction: column; align-items: center; }
+            .input-panel, .ticket-wrapper { min-width: auto; width: 100%; max-width: 400px; }
+            #ticket { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="input-panel">
+            <h2>📝 Input Data Pemesanan</h2>
+            
+            <div class="logo-upload-section">
+                <span class="logo-upload-label">🖼️ Logo Brand:</span>
+                <input type="file" id="logoUploader" accept="image/*" onchange="handleLogoUpload(this)">
+            </div>
+
+            <div class="paste-area">
+                <span class="paste-label">Paste Format WA</span>
+                <textarea id="rawInput" placeholder="Paste format WA di sini...">
+*PEMESANAN TIKET RESTA TRAVEL* �
+----------------------------------
+� *Nama:* Herlina
+� *No HP:* 8127488437
+� *Rute:* Palembang � Jakarta
+� *Jadwal:* 2026-03-06 | Jam 11:00 Siang
+� *Kursi:* No. 1, 4 (2 Seat)
+� *Total:* Rp 1.200.000
+----------------------------------
+� *Jemput:* jl k h balqih
+� *Tujuan:* sdfsdfsdf
+
+Mohon info ketersediaan & pembayaran min. Terima kasih.
+                </textarea>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn-parse" onclick="parseData()">⚡ Isi Otomatis</button>
+                <div class="btn-group">
+                    <button class="download-png" onclick="downloadImage()">🖼️ PNG</button>
+                    <button class="download-pdf" onclick="downloadPDF()">📄 PDF</button>
+                </div>
+            </div>
+            
+            <span class="manual-form-title">Edit Manual:</span>
+            <div class="manual-form">
+                <div class="form-group full-width">
+                    <label>Status Pembayaran</label>
+                    <select id="inStatus" onchange="updateTicket()">
+                        <option value="LUNAS">✅ LUNAS (Sudah Bayar)</option>
+                        <option value="BELUM">❌ BELUM LUNAS (Bayar di Tempat/DP)</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Nama Penumpang</label><input type="text" id="inName" oninput="updateTicket()"></div>
+                <div class="form-group"><label>No. WhatsApp</label><input type="text" id="inPhone" oninput="updateTicket()"></div>
+                <div class="form-group full-width"><label>Jadwal</label><input type="text" id="inDate" oninput="updateTicket()"></div>
+                <div class="form-group"><label>Kota Asal</label><input type="text" id="inFrom" oninput="updateTicket()"></div>
+                <div class="form-group"><label>Kota Tujuan</label><input type="text" id="inTo" oninput="updateTicket()"></div>
+                <div class="form-group"><label>Nomor Kursi</label><input type="text" id="inSeat" oninput="updateTicket()"></div>
+                <div class="form-group"><label>Total Bayar</label><input type="text" id="inTotal" oninput="updateTicket()"></div>
+                <div class="form-group full-width"><label>Lokasi Jemput</label><input type="text" id="inPickup" oninput="updateTicket()"></div>
+                <div class="form-group full-width"><label>Lokasi Tujuan</label><input type="text" id="inDrop" oninput="updateTicket()"></div>
+            </div>
+        </div>
+
+        <div class="ticket-wrapper">
+            <div id="ticket">
+                <div class="ticket-header">
+                    <div class="logo-container">
+                        <img id="ticketLogo" src="" alt="Logo Resta Travel" style="display:none;">
+                        <h1 id="defaultLogoText" style="margin:0; font-size:24px;">RESTA TRAVEL</h1>
+                    </div>
+                    <div class="slogan">"Profesional dan tepat waktu"</div>
+                    <div class="wa-pill">✆ WA: 0812-7488-437</div>
+                </div>
+                
+                <div class="ticket-body">
+                    <div class="notch notch-left"></div>
+                    <div class="notch notch-right"></div>
+
+                    <div class="route-container">
+                        <div class="route-label">RUTE PERJALANAN</div>
+                        <div class="route">
+                            <div class="city-name" id="outFrom">BANDAR LAMPUNG</div>
+                            <div class="route-separator">-</div>
+                            <div class="city-name" id="outTo">PALEMBANG</div>
+                        </div>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <span class="info-label"><span class="icon-label">👤</span> Nama Penumpang</span>
+                            <span class="info-value" id="outName">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label"><span class="icon-label">📅</span> Jadwal Keberangkatan</span>
+                            <span class="info-value" id="outDate">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label"><span class="icon-label">💺</span> Kursi Yang Dipesan</span>
+                            <span class="info-value" id="outSeat">-</span>
+                        </div>
+                         <div class="info-row">
+                            <span class="info-label"><span class="icon-label">📱</span> Kontak Pemesan</span>
+                            <span class="info-value" id="outPhone">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label"><span class="icon-label">🏠</span> Titik Penjemputan</span>
+                            <span class="info-value small-value" id="outPickup">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label"><span class="icon-label">🏢</span> Tujuan Pengantaran</span>
+                            <span class="info-value small-value" id="outDrop">-</span>
+                        </div>
+                    </div>
+
+                    <div class="total-section">
+                        <div id="outStatusStamp" class="status-stamp stamp-paid">LUNAS</div>
+                        <div class="total-label">TOTAL PEMBAYARAN</div>
+                        <div class="total-price" id="outTotal">Rp0</div>
+                    </div>
+                </div>
+                <div class="ticket-footer">
+                    <strong>PENTING:</strong> Harap siap di lokasi 30 menit sebelum jadwal.<br>
+                    Keterlambatan dapat menyebabkan tiket hangus.<br>
+                    <em>Terima kasih telah memilih Resta Travel.</em>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleLogoUpload(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('defaultLogoText').style.display = 'none';
+                    var img = document.getElementById('ticketLogo');
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // --- FUNGSI PARSE DATA (SMART DETECT) ---
+        function parseData() {
+            const text = document.getElementById('rawInput').value;
+            const extract = (key) => {
+                const regex = new RegExp(`${key}\\s*(.*)`);
+                const match = text.match(regex);
+                return match ? match[1].trim() : "";
+            };
+
+            const clean = (str) => str.replace(/[*]/g, '').trim();
+
+            document.getElementById('inName').value = clean(extract('Nama:'));
+            document.getElementById('inPhone').value = clean(extract('No HP:'));
+            
+            // --- LOGIKA PINTAR DETEKSI RUTE ---
+            let ruteRaw = extract('Rute:');
+            ruteRaw = clean(ruteRaw);
+            // Regex ini memecah string jika ketemu simbol aneh, panah, strip, kata 'ke'
+            const splitRute = ruteRaw.split(/\s*[\uFFFD\-\>\|➡️✈🚐]+\s*|\s+(?:ke|to)\s+/i);
+
+            if(splitRute.length > 1) {
+                document.getElementById('inFrom').value = splitRute[0].trim();
+                document.getElementById('inTo').value = splitRute[splitRute.length - 1].trim();
+            } else {
+                document.getElementById('inFrom').value = ruteRaw;
+                document.getElementById('inTo').value = "";
+            }
+
+            document.getElementById('inDate').value = clean(extract('Jadwal:'));
+            document.getElementById('inSeat').value = clean(extract('Kursi:'));
+            document.getElementById('inTotal').value = clean(extract('Total:'));
+            document.getElementById('inPickup').value = clean(extract('Jemput:'));
+            document.getElementById('inDrop').value = clean(extract('Tujuan:'));
+            
+            document.getElementById('inStatus').value = "LUNAS";
+            updateTicket();
+        }
+
+        function updateTicket() {
+            const name = document.getElementById('inName').value;
+            const phone = document.getElementById('inPhone').value;
+            const fromCity = document.getElementById('inFrom').value;
+            const toCity = document.getElementById('inTo').value;
+            const date = document.getElementById('inDate').value;
+            const seat = document.getElementById('inSeat').value;
+            const total = document.getElementById('inTotal').value;
+            const pickup = document.getElementById('inPickup').value;
+            const drop = document.getElementById('inDrop').value;
+            
+            const status = document.getElementById('inStatus').value;
+            const stampElement = document.getElementById('outStatusStamp');
+            
+            if (status === "LUNAS") {
+                stampElement.innerText = "LUNAS";
+                stampElement.className = "status-stamp stamp-paid";
+            } else {
+                stampElement.innerText = "BELUM LUNAS";
+                stampElement.className = "status-stamp stamp-unpaid";
+            }
+
+            document.getElementById('outName').innerText = name || "-";
+            document.getElementById('outPhone').innerText = phone || "-";
+            document.getElementById('outFrom').innerText = (fromCity || "ASAL").toUpperCase();
+            document.getElementById('outTo').innerText = (toCity || "TUJUAN").toUpperCase();
+            document.getElementById('outDate').innerText = date || "-";
+            document.getElementById('outSeat').innerText = seat || "-";
+            document.getElementById('outTotal').innerText = total || "Rp0";
+            document.getElementById('outPickup').innerText = pickup || "-";
+            document.getElementById('outDrop').innerText = drop || "-";
+        }
+
+        function downloadImage() {
+            const ticketElement = document.getElementById("ticket");
+            const btn = document.querySelector('.download-png');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "⏳...";
+
+            html2canvas(ticketElement, { scale: 3, backgroundColor: null, useCORS: true }).then(canvas => {
+                const link = document.createElement("a");
+                document.body.appendChild(link);
+                let fileName = "Tiket";
+                const nameVal = document.getElementById('inName').value;
+                if(nameVal) fileName += "_" + nameVal.replace(/[^a-zA-Z0-9]/g, '_');
+                link.download = fileName + ".png";
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+                document.body.removeChild(link);
+                btn.innerHTML = originalText;
+            });
+        }
+
+        // --- FUNGSI DOWNLOAD PDF (FIX: FIT TO PAGE) ---
+        function downloadPDF() {
+            const ticketElement = document.getElementById("ticket");
+            const btn = document.querySelector('.download-pdf');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "⏳...";
+
+            // 1. Capture dengan resolusi tinggi (scale 2 atau 3)
+            html2canvas(ticketElement, { 
+                scale: 2, 
+                backgroundColor: '#ffffff', 
+                useCORS: true,
+                scrollY: -window.scrollY // Pastikan tidak terpotong karena scroll
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                
+                // 2. Buat PDF A4
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();   // 210mm
+                const pdfHeight = pdf.internal.pageSize.getHeight(); // 297mm
+                
+                const imgProps = pdf.getImageProperties(imgData);
+                const imgWidth = imgProps.width;
+                const imgHeight = imgProps.height;
+                
+                // 3. Hitung area tersedia (margin 10mm)
+                const margin = 10; 
+                const availableWidth = pdfWidth - (margin * 2);
+                const availableHeight = pdfHeight - (margin * 2);
+                
+                // 4. Hitung skala agar muat Lebar DAN Tinggi (Fit to Page)
+                const widthRatio = availableWidth / imgWidth;
+                const heightRatio = availableHeight / imgHeight;
+                
+                // Ambil ratio terkecil agar gambar masuk semua
+                const scaleFactor = Math.min(widthRatio, heightRatio);
+                
+                const finalWidth = imgWidth * scaleFactor;
+                const finalHeight = imgHeight * scaleFactor;
+                
+                // 5. Posisi tengah horizontal
+                const x = (pdfWidth - finalWidth) / 2;
+                const y = 10; // Margin atas 10mm
+
+                pdf.addImage(imgData, 'PNG', x, y, finalWidth, finalHeight);
+                
+                let fileName = "Tiket";
+                const nameVal = document.getElementById('inName').value;
+                if(nameVal) fileName += "_" + nameVal.replace(/[^a-zA-Z0-9]/g, '_');
+                
+                pdf.save(fileName + ".pdf");
+                btn.innerHTML = originalText;
+            });
+        }
+
+        window.onload = parseData;
+    </script>
+</body>
+</html>
