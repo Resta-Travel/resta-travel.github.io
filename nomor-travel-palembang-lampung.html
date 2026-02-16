@@ -1,185 +1,403 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Resta Travel - Travel Palembang Lampung dan Palembang Jakarta terbaik dengan layanan door to door dan armada nyaman.">
-  <meta name="keywords" content="nomor travel palembang lampung, travel palembang lampung terpercaya, travel lampung palembang, pemesanan travel lampung">
-  <meta name="author" content="Resta Travel">
-  <title>Nomor Travel Palembang Lampung | Resta Travel</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-    }
-    .form-container {
-      max-width: 700px;
-      margin: 20px auto;
-      background-color: #004b8d;
-      color: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
-    .form-header {
-      background-color: #00366c;
-      padding: 20px;
-      text-align: center;
-    }
-    .form-header h1 {
-      margin: 0;
-      font-size: 24px;
-      color: white;
-    }
-    form {
-      background: white;
-      padding: 20px;
-      color: black;
-    }
-    label {
-      font-weight: bold;
-      margin-top: 15px;
-      display: block;
-    }
-    input, select, button, a {
-      padding: 10px;
-      width: 100%;
-      margin-top: 5px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-    #map {
-      height: 300px;
-      margin-top: 10px;
-      border-radius: 8px;
-    }
-    a#waLink {
-      display: block;
-      text-align: center;
-      background-color: #25D366;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-    .seat-map {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      max-width: 300px;
-      margin: 20px auto;
-    }
-    .seat-map button {
-      padding: 20px;
-      border-radius: 12px;
-      background: #ccc;
-      border: none;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .seat-map button.selected {
-      background: #25D366;
-      color: white;
-    }
-    .seat-map button.driver {
-      background: black;
-      color: white;
-      cursor: not-allowed;
-    }
-    .seat-map button.empty {
-      visibility: hidden;
-    }
-    @media (max-width: 600px) {
-      .seat-map button {
-        padding: 16px;
-        font-size: 14px;
-      }
-    }
-    article {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-    article h1, h2 {
-      color: #004b8d;
-    }
-    article a {
-      color: #25D366;
-      text-decoration: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Nomor Travel Palembang Lampung WA Aktif 24 Jam | Resta Travel</title>
+    <meta name="description" content="Butuh nomor travel Palembang Lampung yang aktif sekarang? Simpan kontak Resta Travel: 0812-7488-437. Respon cepat 24 jam, antar jemput door to door, armada HiAce nyaman.">
+    <meta name="keywords" content="nomor travel palembang lampung, travel palembang lampung 24 jam, nomor wa travel palembang lampung, pesan travel palembang lampung, travel lampung palembang terpercaya">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://restatravel.site/nomor-travel-palembang-lampung">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #f8fafc; color: #334155; }
+        
+        /* Glassmorphism Panel untuk Form */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(203, 213, 225, 0.5);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        /* --- STYLING DENAH KURSI HIACE (STANDAR RESTA TRAVEL - 4 KOLOM) --- */
+        .car-body {
+            background-color: #fff; border: 4px solid #cbd5e1; border-radius: 40px; padding: 20px 15px 30px 15px;
+            position: relative; max-width: 320px; margin: 0 auto; box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+        }
+        .windshield {
+            height: 40px; background: linear-gradient(to bottom, #94a3b8, #e2e8f0); border-radius: 30px 30px 5px 5px;
+            margin-bottom: 20px; border: 1px solid #64748b;
+        }
+        /* Grid 4 Kolom untuk HiAce */
+        .seat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px 8px; }
+        
+        .seat {
+            height: 45px; background: #f1f5f9; border: 1px solid #94a3b8; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;
+            color: #475569; cursor: pointer; position: relative; transition: all 0.2s ease; box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+        }
+        .seat:hover:not(.driver):not(.selected) { background-color: #bfdbfe; transform: translateY(-2px); border-color: #3b82f6; }
+        .seat.selected { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border-color: #1e40af; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.4); }
+        .seat.driver { background-color: #334155; color: #fbbf24; cursor: default; border: none; }
+        
+        .floating-chat { position: fixed; bottom: 30px; right: 30px; z-index: 100; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+    </style>
 </head>
-<body>
+<body class="text-slate-800">
 
-<article>
-  <h1>Nomor Travel Palembang Lampung Terpercaya dan Cepat Tanggapan</h1>
-  <img src="images/gambar7.jpeg" alt="nomor travel palembang lampung" style="width:100%; max-width:700px; border-radius:12px; margin: 15px 0;" />
-  <p>Mencari <strong>nomor travel Palembang Lampung</strong> yang aktif dan terpercaya? Anda berada di tempat yang tepat! Kami dari <strong>Resta Travel</strong> siap melayani perjalanan Anda dengan aman, nyaman, dan respons cepat. Tidak perlu bingung lagi mencari-cari di internet — cukup simpan kontak kami dan pesan langsung dari rumah Anda!</p>
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center text-2xl font-bold text-blue-900">
+                Resta<span class="text-blue-600">Travel</span>
+            </a>
+            <div class="hidden md:flex items-center gap-6 font-medium text-slate-600">
+                <a href="#kontak" class="hover:text-blue-700 transition">Nomor Kontak</a>
+                <a href="#keunggulan" class="hover:text-blue-700 transition">Keunggulan</a>
+                <a href="#booking" class="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition shadow-lg shadow-blue-500/30 animate-pulse">Pesan Tiket Online</a>
+            </div>
+            <button class="md:hidden text-slate-600 text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
 
-  <h2>Kenapa Harus Resta Travel?</h2>
-  <ul>
-    <li><strong>Pelayanan Door to Door</strong> – Kami menjemput dan mengantar langsung ke alamat tujuan Anda.</li>
-    <li><strong>Armada Nyaman dan Bersih</strong> – Menggunakan kendaraan terbaru dengan AC dan reclining seat.</li>
-    <li><strong>Driver Profesional</strong> – Sopir berpengalaman dan ramah.</li>
-    <li><strong>Jadwal Keberangkatan Fleksibel</strong> – Pagi dan malam hari.</li>
-    <li><strong>Harga Transparan</strong> – Tidak ada biaya tambahan tersembunyi.</li>
-  </ul>
+    <header class="relative pt-32 pb-16 lg:pt-40 lg:pb-28 bg-slate-900 text-white">
+        <div class="absolute inset-0 z-0 opacity-50">
+             <img src="images/gambar7.jpeg" 
+                 alt="Armada Resta Travel Palembang Lampung siap berangkat" 
+                 class="w-full h-full object-cover">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-blue-900 via-slate-900/80 to-transparent z-0"></div>
 
-  <h2>Nomor Travel Palembang Lampung Aktif 24 Jam</h2>
-  <p>Butuh bantuan cepat? Langsung hubungi nomor WhatsApp resmi kami:</p>
+        <div class="container relative z-10 px-4 text-center max-w-4xl mx-auto">
+            <span class="inline-block py-1 px-4 rounded-full bg-green-500/20 border border-green-400 text-green-300 text-sm font-bold mb-4 backdrop-blur-sm">
+                <i class="fab fa-whatsapp mr-1"></i> ADMIN FAST RESPON 24 JAM
+            </span>
+            <h1 class="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+                Nomor Travel Palembang Lampung Terpercaya & Pasti Berangkat
+            </h1>
+            <p class="text-lg text-slate-200 mb-8 max-w-2xl mx-auto">
+                Jangan sampai salah pilih! Simpan nomor kontak resmi Resta Travel ini untuk pemesanan tiket cepat, aman, dan layanan antar jemput sampai depan rumah.
+            </p>
+            <a href="#kontak" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg transition shadow-lg shadow-green-500/30 inline-flex items-center gap-2">
+                <i class="fab fa-whatsapp text-xl"></i> Hubungi Admin Sekarang
+            </a>
+        </div>
+    </header>
 
-  <p style="font-size: 18px; font-weight: bold; color: green;">
-    📞 <a href="https://wa.me/628127488437" target="_blank">+62 812-7488-437</a>
-  </p>
+    <section id="kontak" class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <article class="prose lg:prose-xl mx-auto text-slate-600">
+                <p class="lead text-xl text-slate-700 mb-8 font-medium">
+                    Lagi butuh <strong>nomor travel Palembang Lampung</strong> yang beneran aktif dan bisa dihubungi sekarang juga? Anda berada di halaman yang tepat.
+                </p>
 
-  <p>Kami siap melayani Anda setiap hari, termasuk hari libur! Tim admin kami akan merespons dengan cepat untuk konfirmasi kursi dan jadwal keberangkatan.</p>
+                <p>
+                    Kami paham betapa repotnya mencari kontak travel yang terpercaya, apalagi jika Anda butuh berangkat mendadak. Banyak nomor yang tidak aktif atau admin yang slow respon. Di <strong>Resta Travel</strong>, kami menjamin respon cepat 24 jam untuk kepastian perjalanan Anda.
+                </p>
 
-  <h2>Cara Pesan Tiket Travel Palembang ke Lampung</h2>
-  <ol>
-    <li>Kunjungi halaman utama kami atau langsung isi <strong>Form Pemesanan Tiket</strong> di bagian atas halaman ini.</li>
-    <li>Pilih titik penjemputan Anda (bisa otomatis atau geser peta).</li>
-    <li>Pilih tanggal, jam, kursi, dan kota tujuan.</li>
-    <li>Klik tombol <strong>"Pesan via WhatsApp"</strong> dan Anda akan langsung terhubung ke admin kami.</li>
-  </ol>
+                <div class="my-10 p-8 bg-blue-50 rounded-3xl border-2 border-blue-200 text-center shadow-sm not-prose">
+                    <h2 class="text-2xl font-bold text-blue-900 mb-2">Simpan Nomor Resmi Resta Travel</h2>
+                    <p class="text-slate-600 mb-6">Klik nomor di bawah ini untuk langsung terhubung ke WhatsApp Admin kami (Anti Ribet):</p>
+                    
+                    <a href="https://wa.me/628127488437?text=Halo%20Admin%20Resta%20Travel,%20saya%20mau%20tanya%20jadwal%20ke%20Lampung" target="_blank" class="inline-flex items-center gap-3 text-3xl md:text-4xl font-extrabold text-green-600 hover:text-green-700 transition underline-offset-4 hover:underline">
+                        <i class="fab fa-whatsapp"></i> 0812-7488-437
+                    </a>
+                    <p class="text-sm text-slate-500 mt-4">Melayani rute Palembang ⇄ Lampung (PP) setiap hari.</p>
+                </div>
 
-  <h2>Testimoni Pelanggan</h2>
-  <blockquote style="background: #f0f0f0; padding: 15px; border-left: 4px solid #004b8d;">
-    "Saya sudah 3 kali menggunakan Resta Travel untuk perjalanan ke Lampung. Pelayanannya cepat, mobilnya bersih, dan adminnya ramah. Sangat direkomendasikan!" – <em>Andi, Palembang</em>
-  </blockquote>
+                <h3 id="keunggulan" class="text-2xl font-bold text-slate-800 mt-12 mb-6">Kenapa Ribuan Penumpang Memilih Resta Travel?</h3>
+                <p>Bukan sekadar nomor telepon, kami menawarkan pengalaman perjalanan premium:</p>
+                <ul class="space-y-4 not-prose mb-10">
+                    <li class="flex items-start gap-3">
+                        <span class="bg-blue-100 text-blue-600 p-2 rounded-full"><i class="fas fa-door-open"></i></span>
+                        <div><strong>Layanan Door to Door Asli:</strong> Dijemput di depan rumah di Palembang, diantar sampai alamat tujuan di Lampung. Tidak perlu ke pool/terminal.</div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="bg-blue-100 text-blue-600 p-2 rounded-full"><i class="fas fa-shuttle-van"></i></span>
+                        <div><strong>Armada HiAce Executive:</strong> Unit terbaru, bersih, wangi, AC dingin, dan kursi nyaman untuk perjalanan jauh via tol.</div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="bg-blue-100 text-blue-600 p-2 rounded-full"><i class="fas fa-user-tie"></i></span>
+                        <div><strong>Driver Profesional:</strong> Sopir ramah, berpengalaman, tidak ugal-ugalan, dan mengutamakan keselamatan.</div>
+                    </li>
+                </ul>
 
-  <h2>Hubungi Sekarang Juga!</h2>
-  <p>Jangan tunda lagi! Klik tombol di bawah ini untuk memesan atau bertanya langsung via WhatsApp:</p>
+                <h3 class="text-2xl font-bold text-slate-800 mt-8 mb-4">Testimoni Pelanggan</h3>
+                <blockquote class="p-6 bg-slate-50 border-l-8 border-blue-500 rounded-r-xl italic text-slate-600 not-prose shadow-sm">
+                    "Saya sempat bingung cari <strong>nomor travel Palembang Lampung</strong> yang bisa berangkat malam. Untung nemu Resta Travel. Adminnya gercep banget balas WA jam 9 malam. Besoknya dijemput tepat waktu pakai HiAce baru. Sangat recommended!" 
+                    <footer class="text-slate-800 font-bold mt-3 not-italic">— Pak Budi, Sukarami Palembang</footer>
+                </blockquote>
 
-  <p style="text-align: center;">
-    <a href="https://wa.me/628127488437" target="_blank" style="display:inline-block; padding:12px 24px; background:#25D366; color:white; font-weight:bold; border-radius:6px; text-decoration:none;">Chat Admin Sekarang</a>
-  </p>
+                <p class="mt-10">
+                    Jadi, tidak perlu ragu lagi. Simpan nomor kami sekarang, atau agar lebih mudah, Anda bisa langsung memilih kursi dan mengisi formulir pemesanan online di bawah ini untuk berbagai tujuan.
+                </p>
+            </article>
+        </div>
+    </section>
 
-  <p>Dengan Resta Travel, perjalanan Anda antara Palembang dan Lampung jadi lebih tenang, aman, dan nyaman.</p>
+    <section id="booking" class="relative py-16 bg-slate-100 container mx-auto px-4 z-10">
+        <div class="text-center mb-10">
+            <span class="text-blue-600 font-bold tracking-wider text-sm uppercase">Booking Online Cepat</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mt-2">Formulir Pesan Tiket Travel</h2>
+            <p class="text-slate-500 mt-2">Melayani rute Palembang, Lampung, Jakarta, dan Jambi.</p>
+        </div>
 
-  <hr />
-  <p style="font-size: 12px; color: gray;">Artikel ini dioptimasi dengan kata kunci: nomor travel Palembang Lampung, travel Palembang Lampung terpercaya, pemesanan travel Lampung. Semua konten original dan ditujukan untuk membantu pengguna mendapatkan layanan travel terbaik.</p>
-</article>
+        <div class="glass-card rounded-3xl p-6 md:p-10 max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="bg-white/80 p-6 rounded-2xl border border-slate-200 shadow-sm">
+                        <h3 class="font-bold text-blue-900 text-lg mb-4 flex items-center gap-2"><i class="fas fa-route"></i> Rute & Jadwal</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Kota Asal</label>
+                                <select id="asal" onchange="calculatePrice()" class="w-full p-3 bg-slate-50 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                    <option value="">Pilih Asal</option>
+                                    <option value="Palembang">Palembang</option>
+                                    <option value="Bandar Lampung">Bandar Lampung</option>
+                                    <option value="Jakarta">Jakarta</option>
+                                    <option value="Jambi">Jambi</option>
+                                    <option value="Metro">Metro</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Kota Tujuan</label>
+                                <select id="tujuan" onchange="calculatePrice()" class="w-full p-3 bg-slate-50 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                    <option value="">Pilih Tujuan</option>
+                                    <option value="Palembang">Palembang</option>
+                                    <option value="Bandar Lampung">Bandar Lampung</option>
+                                    <option value="Jakarta">Jakarta</option>
+                                    <option value="Jambi">Jambi</option>
+                                    <option value="Metro">Metro</option>
+                                </select>
+                            </div>
+                        </div>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-// script peta dan WhatsApp sudah disertakan sebelumnya (tidak diulang di sini)
-</script>
-<iframe 
-  src="index.html" 
-  width="100%" 
-  height="800" 
-  frameborder="0" 
-  style="border:1px solid #ccc; border-radius:8px;">
-</iframe>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Tanggal Berangkat</label>
+                                <input type="date" id="tanggal" class="w-full p-3 bg-slate-50 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Jam Berangkat</label>
+                                <select id="jam" class="w-full p-3 bg-slate-50 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                    <option value="11:00 Siang">11:00 Siang</option>
+                                    <option value="15:00 Sore">15:00 Sore</option>
+                                    <option value="20:00 Malam">20:00 Malam</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/80 p-6 rounded-2xl border border-slate-200 shadow-sm">
+                        <h3 class="font-bold text-blue-900 text-lg mb-4 flex items-center gap-2"><i class="fas fa-user-edit"></i> Data Penumpang</h3>
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Nama Lengkap</label>
+                                    <input type="text" id="nama" placeholder="Nama Pemesan" class="w-full p-3 bg-slate-50 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">No. WhatsApp</label>
+                                    <input type="tel" id="hp" placeholder="08xxxxxxxxxx" class="w-full p-3 bg-slate-50 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Alamat Jemput Lengkap</label>
+                                <textarea id="alamat_jemput" rows="2" placeholder="Nama Jalan, No. Rumah, Kelurahan, Patokan..." class="w-full p-3 bg-slate-50 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none transition"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Alamat Tujuan Lengkap</label>
+                                <textarea id="alamat_antar" rows="2" placeholder="Alamat tujuan pengantaran..." class="w-full p-3 bg-slate-50 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none transition"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-200 sticky top-24">
+                        <h3 class="font-bold text-xl mb-1 text-slate-800 text-center">Pilih Kursi HiAce</h3>
+                        <p class="text-xs text-slate-400 text-center mb-6">Supir di Kanan Depan</p>
+                        
+                        <div class="relative pb-6">
+                            <div class="absolute top-[60px] left-1/2 -ml-[182px] w-5 h-8 bg-slate-700 rounded-l-md"></div>
+                            <div class="absolute top-[60px] right-1/2 -mr-[182px] w-5 h-8 bg-slate-700 rounded-r-md"></div>
+
+                            <div class="car-body">
+                                <div class="windshield"></div>
+                                <div class="seat-grid">
+                                    <div class="seat" onclick="toggleSeat(this, 1)">1</div>
+                                    <div class="col-span-2"></div> 
+                                    <div class="seat driver"><i class="fas fa-steering-wheel"></i></div>
+                                    
+                                    <div></div>
+                                    <div class="seat" onclick="toggleSeat(this, 4)">4</div>
+                                    <div class="seat" onclick="toggleSeat(this, 3)">3</div>
+                                    <div class="seat" onclick="toggleSeat(this, 2)">2</div>
+                                    
+                                    <div class="seat" onclick="toggleSeat(this, 7)">7</div>
+                                    <div></div>
+                                    <div class="seat" onclick="toggleSeat(this, 6)">6</div>
+                                    <div class="seat" onclick="toggleSeat(this, 5)">5</div>
+                                    
+                                    <div class="seat" onclick="toggleSeat(this, 10)">10</div>
+                                    <div></div>
+                                    <div class="seat" onclick="toggleSeat(this, 9)">9</div>
+                                    <div class="seat" onclick="toggleSeat(this, 8)">8</div>
+                                    
+                                    <div class="seat" onclick="toggleSeat(this, 14)">14</div>
+                                    <div class="seat" onclick="toggleSeat(this, 13)">13</div>
+                                    <div class="seat" onclick="toggleSeat(this, 12)">12</div>
+                                    <div class="seat" onclick="toggleSeat(this, 11)">11</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 mb-6">
+                            <div class="flex justify-between mb-2 text-sm text-slate-600">
+                                <span>Kursi Dipilih:</span> <span id="seat-list" class="font-bold text-slate-900">-</span>
+                            </div>
+                            <hr class="border-slate-200 my-2">
+                            <div class="flex justify-between items-end">
+                                <span>Harga Satuan: <span id="unit-price-display" class="font-semibold">Rp 0</span></span>
+                            </div>
+                            <div class="flex justify-between items-end mt-2">
+                                <span class="font-bold text-slate-700">Total Harga</span>
+                                <span id="total-price" class="font-bold text-3xl text-blue-600">Rp 0</span>
+                            </div>
+                        </div>
+
+                        <button onclick="sendToWhatsapp()" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-green-500/30 transition transform hover:-translate-y-1 flex justify-center items-center gap-3 group text-lg">
+                            <i class="fab fa-whatsapp text-2xl group-hover:animate-bounce"></i> KIRIM PESANAN VIA WA
+                        </button>
+                        <p class="text-xs text-center text-slate-500 mt-4">*Data akan terkirim ke WhatsApp Admin 0812-7488-437</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="https://wa.me/628127488437" target="_blank" class="floating-chat bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110" aria-label="Chat WhatsApp">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+
+    <footer class="bg-slate-900 text-white py-10 mt-20 border-t-4 border-blue-600">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-2">Resta Travel</h3>
+            <p class="text-slate-400 mb-6">Solusi Transportasi Darat Terpercaya Palembang, Lampung, Jakarta, Jambi</p>
+            <div class="flex justify-center gap-4 mb-8">
+                <a href="#" class="text-slate-400 hover:text-white"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" class="text-slate-400 hover:text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="text-slate-400 hover:text-white"><i class="fab fa-tiktok fa-lg"></i></a>
+            </div>
+            <div class="border-t border-slate-800 pt-8 text-sm text-slate-500">
+                &copy; 2026 Resta Travel. Hak Cipta Dilindungi.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let selectedSeats = [];
+        let unitPrice = 0; 
+
+        // DATABASE HARGA RESTA TRAVEL (Termasuk Metro)
+        const prices = {
+            "Palembang-Bandar Lampung": 250000, "Bandar Lampung-Palembang": 250000,
+            "Palembang-Jakarta": 600000, "Jakarta-Palembang": 600000,
+            "Palembang-Jambi": 200000, "Jambi-Palembang": 200000,
+            "Bandar Lampung-Jakarta": 400000, "Jakarta-Bandar Lampung": 400000,
+            "Bandar Lampung-Jambi": 450000, "Jambi-Bandar Lampung": 450000,
+            "Metro-Palembang": 250000, "Palembang-Metro": 250000,
+            "Metro-Jakarta": 400000, "Jakarta-Metro": 400000
+        };
+
+        const formatRupiah = (angka) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+
+        function calculatePrice() {
+            const asal = document.getElementById('asal').value;
+            const tujuan = document.getElementById('tujuan').value;
+            const key = `${asal}-${tujuan}`;
+
+            if (prices[key]) {
+                unitPrice = prices[key];
+            } else {
+                unitPrice = 0; 
+            }
+            
+            document.getElementById('unit-price-display').innerText = formatRupiah(unitPrice);
+            updateTotal(); 
+        }
+
+        function toggleSeat(el, number) {
+            if (el.classList.contains('selected')) {
+                el.classList.remove('selected');
+                selectedSeats = selectedSeats.filter(s => s !== number);
+            } else {
+                el.classList.add('selected');
+                selectedSeats.push(number);
+            }
+            selectedSeats.sort((a, b) => a - b);
+            updateTotal();
+        }
+
+        function updateTotal() {
+            document.getElementById('seat-list').innerText = selectedSeats.length > 0 ? selectedSeats.join(', ') : '-';
+            const total = selectedSeats.length * unitPrice;
+            document.getElementById('total-price').innerText = formatRupiah(total);
+        }
+
+        // --- FUNGSI KIRIM WA (YANG SUDAH DIPERBAIKI TOTAL) ---
+        function sendToWhatsapp() {
+            const nama = document.getElementById('nama').value.trim();
+            const hp = document.getElementById('hp').value.trim();
+            const asal = document.getElementById('asal').value;
+            const tujuan = document.getElementById('tujuan').value;
+            const tanggal = document.getElementById('tanggal').value;
+            const jam = document.getElementById('jam').value;
+            const jemput = document.getElementById('alamat_jemput').value.trim();
+            const antar = document.getElementById('alamat_antar').value.trim();
+
+            if (nama === "" || hp === "" || tanggal === "" || asal === "" || tujuan === "") {
+                alert("Mohon lengkapi Data Diri, Rute, dan Tanggal Perjalanan.");
+                return;
+            }
+            if (selectedSeats.length === 0) {
+                alert("Silakan pilih minimal 1 kursi di denah mobil.");
+                return;
+            }
+            if (unitPrice === 0) {
+                alert("Rute belum didukung atau harga belum tersedia. Cek kembali Asal dan Tujuan.");
+                return;
+            }
+
+            const totalBayar = formatRupiah(selectedSeats.length * unitPrice);
+            
+            // FORMAT PESAN WA YANG SAMA PERSIS DENGAN CONTOH ANDA
+            let msg = `*PEMESANAN TIKET RESTA TRAVEL* 🚐\n`;
+            msg += `----------------------------------\n`;
+            msg += `👤 *Nama:* ${nama}\n`;
+            msg += `📱 *No HP:* ${hp}\n`;
+            msg += `📍 *Rute:* ${asal} ➡️ ${tujuan}\n`;
+            msg += `📅 *Jadwal:* ${tanggal} | ${jam}\n`;
+            msg += `💺 *Kursi:* No. ${selectedSeats.join(', ')} (${selectedSeats.length} Seat)\n`;
+            msg += `💰 *Total:* ${totalBayar}\n`;
+            msg += `----------------------------------\n`;
+            msg += `🏠 *Jemput:* ${jemput}\n`;
+            msg += `🏢 *Tujuan:* ${antar}\n\n`;
+            msg += `Mohon info ketersediaan & pembayaran min. Terima kasih.`;
+
+            window.open(`https://wa.me/628127488437?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+        
+        document.getElementById('tanggal').min = new Date().toISOString().split("T")[0];
+    </script>
+
 </body>
 </html>
