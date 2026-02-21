@@ -13,7 +13,6 @@
     <style>
         body { font-family: 'Poppins', sans-serif; background-color: transparent; margin: 0; padding: 10px; }
         
-        /* Container Form Embed */
         .embed-container {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -24,7 +23,6 @@
             overflow: hidden;
         }
 
-        /* --- STYLING DENAH KURSI HIACE --- */
         .car-body {
             background-color: #fff;
             border: 4px solid #cbd5e1;
@@ -99,6 +97,8 @@
 
     <div class="embed-container p-4 md:p-8">
         <div class="text-center mb-8">
+            <img src="logo.png" alt="Logo Resta Travel" class="h-16 md:h-20 mx-auto mb-4 object-contain" onerror="this.src='https://via.placeholder.com/200x60?text=RESTA+TRAVEL'">
+            
             <h2 class="text-2xl font-bold text-slate-800">Formulir Pemesanan Tiket</h2>
             <p class="text-slate-500 mt-1 text-sm">Harga menyesuaikan otomatis antara tanggal Normal & Tuslah (14-29 Maret).</p>
         </div>
@@ -268,7 +268,7 @@
             
             <div id="ticket-content" class="bg-blue-50 p-0 relative">
                 <div class="bg-gradient-to-b from-blue-700 to-blue-600 p-5 text-center text-white">
-                    <h2 class="text-2xl font-bold tracking-wider mb-1">RESTA TRAVEL</h2>
+                    <img src="logo.png" alt="Resta Travel Logo" class="h-12 mx-auto mb-2 object-contain brightness-0 invert" onerror="this.src='https://via.placeholder.com/150x50?text=RESTA+TRAVEL'">
                     <p class="text-xs italic font-medium mb-3">"PROFESIONAL DAN TEPAT WAKTU"</p>
                     <div class="inline-block bg-blue-500/50 border border-blue-400/50 rounded-full px-4 py-1.5 text-xs font-bold">
                         <i class="fab fa-whatsapp mr-1"></i> WA: 0812-7488-437
@@ -513,9 +513,12 @@
             }
 
             const totalBayar = formatRupiah(selectedSeats.length * unitPrice);
+            
+            // 1. Generate E-Ticket Gambar
             generateTicket(nama, hp, asal, tujuan, tanggal, jam, jemput, antar, totalBayar);
 
-            let msg = `*PEMESANAN TIKET MUDIK RESTA TRAVEL* 🚐\n`;
+            // 2. Format Pesan WA Dikembalikan ke Versi HTML Asli Anda
+            let msg = `*PEMESANAN TIKET RESTA TRAVEL* 🚐\n`;
             msg += `----------------------------------\n`;
             msg += `👤 *Nama:* ${nama}\n`;
             msg += `📱 *No HP:* ${hp}\n`;
@@ -528,7 +531,10 @@
             msg += `🏢 *Tujuan:* ${antar}\n\n`;
             msg += `Mohon info ketersediaan & pembayaran min. Terima kasih.`;
 
-            setTimeout(() => { window.open(`https://wa.me/628127488437?text=${encodeURIComponent(msg)}`, '_blank'); }, 500);
+            // Buka WA setelah jeda agar E-Ticket muncul duluan
+            setTimeout(() => { 
+                window.open(`https://wa.me/628127488437?text=${encodeURIComponent(msg)}`, '_blank'); 
+            }, 500);
         }
         
         document.getElementById('tanggal').min = new Date().toISOString().split("T")[0];
