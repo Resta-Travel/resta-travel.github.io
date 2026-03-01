@@ -26,10 +26,10 @@
         /* --- STYLING DENAH KURSI OVERLAY IMAGE --- */
         .seat-overlay {
             position: absolute;
-            width: 16%; /* Diperlebar agar pas dengan kursi */
-            height: 9%;  /* Ditinggikan agar menutupi bantalan penuh */
+            width: 19.5%; /* Diperlebar menyesuaikan gambar baru */
+            height: 11.5%; /* Ditinggikan menyesuaikan jok */
             background-color: transparent;
-            border-radius: 10px; /* Sudut disesuaikan dengan kontur jok */
+            border-radius: 12px; /* Dibuat lebih membulat */
             cursor: pointer;
             transition: all 0.2s ease;
             z-index: 10;
@@ -152,26 +152,26 @@
                 <div class="bg-[#111214] p-5 rounded-2xl shadow-sm border border-slate-800">
                     
                     <div class="relative w-full max-w-[600px] mx-auto pb-4">
-                        <img src="kursi.png" alt="Denah Kursi HiAce" class="w-full h-auto rounded-xl">
+                        <img src="k.png" alt="Denah Kursi HiAce" class="w-full h-auto rounded-xl">
                         
-                        <div class="seat-overlay" style="top: 29.5%; left: 16.5%;" onclick="toggleSeat(this, 1)"></div>
+                        <div class="seat-overlay" style="top: 22.5%; left: 6.5%;" onclick="toggleSeat(this, 1)"></div>
 
-                        <div class="seat-overlay" style="top: 41%; left: 34.5%;" onclick="toggleSeat(this, 4)"></div>
-                        <div class="seat-overlay" style="top: 41%; left: 52.5%;" onclick="toggleSeat(this, 3)"></div>
-                        <div class="seat-overlay" style="top: 41%; left: 70.5%;" onclick="toggleSeat(this, 2)"></div>
+                        <div class="seat-overlay" style="top: 36.5%; left: 29.5%;" onclick="toggleSeat(this, 4)"></div>
+                        <div class="seat-overlay" style="top: 36.5%; left: 51.5%;" onclick="toggleSeat(this, 3)"></div>
+                        <div class="seat-overlay" style="top: 36.5%; left: 74%;" onclick="toggleSeat(this, 2)"></div>
 
-                        <div class="seat-overlay" style="top: 52%; left: 16.5%;" onclick="toggleSeat(this, 7)"></div>
-                        <div class="seat-overlay" style="top: 52%; left: 52.5%;" onclick="toggleSeat(this, 6)"></div>
-                        <div class="seat-overlay" style="top: 52%; left: 70.5%;" onclick="toggleSeat(this, 5)"></div>
+                        <div class="seat-overlay" style="top: 50.5%; left: 6.5%;" onclick="toggleSeat(this, 7)"></div>
+                        <div class="seat-overlay" style="top: 50.5%; left: 51.5%;" onclick="toggleSeat(this, 6)"></div>
+                        <div class="seat-overlay" style="top: 50.5%; left: 74%;" onclick="toggleSeat(this, 5)"></div>
 
-                        <div class="seat-overlay" style="top: 63%; left: 16.5%;" onclick="toggleSeat(this, 10)"></div>
-                        <div class="seat-overlay" style="top: 63%; left: 52.5%;" onclick="toggleSeat(this, 9)"></div>
-                        <div class="seat-overlay" style="top: 63%; left: 70.5%;" onclick="toggleSeat(this, 8)"></div>
+                        <div class="seat-overlay" style="top: 64.5%; left: 6.5%;" onclick="toggleSeat(this, 10)"></div>
+                        <div class="seat-overlay" style="top: 64.5%; left: 51.5%;" onclick="toggleSeat(this, 9)"></div>
+                        <div class="seat-overlay" style="top: 64.5%; left: 74%;" onclick="toggleSeat(this, 8)"></div>
 
-                        <div class="seat-overlay" style="top: 74%; left: 16.5%;" onclick="toggleSeat(this, 14)"></div>
-                        <div class="seat-overlay" style="top: 74%; left: 34.5%;" onclick="toggleSeat(this, 13)"></div>
-                        <div class="seat-overlay" style="top: 74%; left: 52.5%;" onclick="toggleSeat(this, 12)"></div>
-                        <div class="seat-overlay" style="top: 74%; left: 70.5%;" onclick="toggleSeat(this, 11)"></div>
+                        <div class="seat-overlay" style="top: 78.5%; left: 6.5%;" onclick="toggleSeat(this, 14)"></div>
+                        <div class="seat-overlay" style="top: 78.5%; left: 29.5%;" onclick="toggleSeat(this, 13)"></div>
+                        <div class="seat-overlay" style="top: 78.5%; left: 51.5%;" onclick="toggleSeat(this, 12)"></div>
+                        <div class="seat-overlay" style="top: 78.5%; left: 74%;" onclick="toggleSeat(this, 11)"></div>
                     </div>
 
                     <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 mt-2">
@@ -452,7 +452,7 @@
             const totalBayar = formatRupiah(selectedSeats.length * unitPrice);
             generateTicket(nama, hp, asal, tujuan, tanggal, jam, jemput, antar, totalBayar);
 
-            let msg = `*PEMESANAN TIKET MUDIK RESTA TRAVEL* 🚐\n`;
+            let msg = `*PEMESANAN TIKET RESTA TRAVEL* 🚐\n`;
             msg += `----------------------------------\n`;
             msg += `👤 *Nama:* ${nama}\n`;
             msg += `📱 *No HP:* ${hp}\n`;
@@ -473,4 +473,3 @@
     </script>
 </body>
 </html>
-
