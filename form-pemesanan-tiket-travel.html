@@ -13,6 +13,7 @@
     <style>
         body { font-family: 'Poppins', sans-serif; background-color: transparent; margin: 0; padding: 10px; }
         
+        /* Container Form Embed */
         .embed-container {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -26,22 +27,22 @@
         /* --- STYLING DENAH KURSI OVERLAY IMAGE --- */
         .seat-overlay {
             position: absolute;
-            width: 19.5%; /* Diperlebar menyesuaikan gambar baru */
-            height: 11.5%; /* Ditinggikan menyesuaikan jok */
             background-color: transparent;
-            border-radius: 12px; /* Dibuat lebih membulat */
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
             z-index: 10;
         }
         
+        /* Efek Hover saat kursi kosong */
         .seat-overlay:hover:not(.selected) {
             background-color: rgba(59, 130, 246, 0.3);
             border: 1px solid rgba(59, 130, 246, 0.5);
         }
 
+        /* Efek saat kursi dipilih (Dipilih) */
         .seat-overlay.selected {
-            background-color: rgba(37, 99, 235, 0.65); 
+            background-color: rgba(37, 99, 235, 0.65);
             border: 2px solid #3b82f6;
             box-shadow: 0 0 12px rgba(59, 130, 246, 0.8);
         }
@@ -94,7 +95,7 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Tanggal Keberangkatan</label>
                             <input type="date" id="tanggal" onchange="calculatePrice()" class="w-full p-3 bg-white rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none">
@@ -109,7 +110,40 @@
                         </div>
                     </div>
 
-                    <div id="price-box" class="hidden bg-blue-100 border-l-4 border-blue-600 p-3 rounded flex justify-between items-center">
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Pilihan Armada</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="cursor-pointer relative">
+                                <input type="radio" name="armada_radio" value="HiAce" class="peer sr-only" onchange="changeArmada()" checked>
+                                <div class="rounded-xl border-2 border-slate-200 peer-checked:border-blue-500 peer-checked:bg-blue-50 peer-checked:shadow-md overflow-hidden transition-all bg-white hover:border-blue-300 h-full flex flex-col">
+                                    <img src="Premio.png" alt="Toyota HiAce" class="w-full h-32 object-cover border-b border-slate-100">
+                                    <div class="p-3 text-center flex-grow flex flex-col justify-center">
+                                        <span class="block font-bold text-sm text-slate-800">Toyota HiAce</span>
+                                        <span class="block text-xs text-slate-500 mt-0.5">Kapasitas 14 Seat</span>
+                                    </div>
+                                </div>
+                                <div class="absolute top-2 right-2 bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 peer-checked:opacity-100 transition-opacity shadow-sm">
+                                    <i class="fas fa-check text-xs"></i>
+                                </div>
+                            </label>
+
+                            <label class="cursor-pointer relative">
+                                <input type="radio" name="armada_radio" value="Innova" class="peer sr-only" onchange="changeArmada()">
+                                <div class="rounded-xl border-2 border-slate-200 peer-checked:border-blue-500 peer-checked:bg-blue-50 peer-checked:shadow-md overflow-hidden transition-all bg-white hover:border-blue-300 h-full flex flex-col">
+                                    <img src="reborn.png" alt="Innova Reborn" class="w-full h-32 object-cover border-b border-slate-100">
+                                    <div class="p-3 text-center flex-grow flex flex-col justify-center">
+                                        <span class="block font-bold text-sm text-slate-800">Innova Reborn</span>
+                                        <span class="block text-xs text-slate-500 mt-0.5">Kapasitas 6 Seat</span>
+                                    </div>
+                                </div>
+                                <div class="absolute top-2 right-2 bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 peer-checked:opacity-100 transition-opacity shadow-sm">
+                                    <i class="fas fa-check text-xs"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="price-box" class="hidden bg-blue-100 border-l-4 border-blue-600 p-3 rounded flex justify-between items-center mt-5">
                         <div>
                             <span class="text-sm text-blue-800 font-medium block">Harga per Tiket:</span>
                             <span id="tuslah-indicator" class="text-[10px] font-bold text-orange-600 uppercase bg-orange-200 px-2 py-0.5 rounded hidden">Tarif Tuslah Lebaran</span>
@@ -151,27 +185,40 @@
             <div class="lg:col-span-5">
                 <div class="bg-[#111214] p-5 rounded-2xl shadow-sm border border-slate-800">
                     
-                    <div class="relative w-full max-w-[600px] mx-auto pb-4">
+                    <div id="hiace-container" class="relative w-full max-w-[600px] mx-auto pb-4 block">
                         <img src="k.png" alt="Denah Kursi HiAce" class="w-full h-auto rounded-xl">
                         
-                        <div class="seat-overlay" style="top: 22.5%; left: 6.5%;" onclick="toggleSeat(this, 1)"></div>
+                        <div class="seat-overlay" style="top: 24%; left: 9.5%; width: 17%; height: 10%;" onclick="toggleSeat(this, 1)"></div>
+                    
+                        <div class="seat-overlay" style="top: 36.5%; left: 29.5%; width: 17%; height: 10%;" onclick="toggleSeat(this, 4)"></div>
+                        <div class="seat-overlay" style="top: 36.5%; left: 52%; width: 17%; height: 10%;" onclick="toggleSeat(this, 3)"></div>
+                        <div class="seat-overlay" style="top: 36.5%; left: 74.5%; width: 17%; height: 10%;" onclick="toggleSeat(this, 2)"></div>
+                    
+                        <div class="seat-overlay" style="top: 50.5%; left: 9.5%; width: 17%; height: 10%;" onclick="toggleSeat(this, 7)"></div>
+                        <div class="seat-overlay" style="top: 50.5%; left: 52%; width: 17%; height: 10%;" onclick="toggleSeat(this, 6)"></div>
+                        <div class="seat-overlay" style="top: 50.5%; left: 74.5%; width: 17%; height: 10%;" onclick="toggleSeat(this, 5)"></div>
+                    
+                        <div class="seat-overlay" style="top: 65%; left: 9.5%; width: 17%; height: 10%;" onclick="toggleSeat(this, 10)"></div>
+                        <div class="seat-overlay" style="top: 65%; left: 52%; width: 17%; height: 10%;" onclick="toggleSeat(this, 9)"></div>
+                        <div class="seat-overlay" style="top: 65%; left: 74.5%; width: 17%; height: 10%;" onclick="toggleSeat(this, 8)"></div>
+                    
+                        <div class="seat-overlay" style="top: 79%; left: 9.5%; width: 17%; height: 10%;" onclick="toggleSeat(this, 14)"></div>
+                        <div class="seat-overlay" style="top: 79%; left: 29.5%; width: 17%; height: 10%;" onclick="toggleSeat(this, 13)"></div>
+                        <div class="seat-overlay" style="top: 79%; left: 52%; width: 17%; height: 10%;" onclick="toggleSeat(this, 12)"></div>
+                        <div class="seat-overlay" style="top: 79%; left: 74.5%; width: 17%; height: 10%;" onclick="toggleSeat(this, 11)"></div>
+                    </div>
 
-                        <div class="seat-overlay" style="top: 36.5%; left: 29.5%;" onclick="toggleSeat(this, 4)"></div>
-                        <div class="seat-overlay" style="top: 36.5%; left: 51.5%;" onclick="toggleSeat(this, 3)"></div>
-                        <div class="seat-overlay" style="top: 36.5%; left: 74%;" onclick="toggleSeat(this, 2)"></div>
-
-                        <div class="seat-overlay" style="top: 50.5%; left: 6.5%;" onclick="toggleSeat(this, 7)"></div>
-                        <div class="seat-overlay" style="top: 50.5%; left: 51.5%;" onclick="toggleSeat(this, 6)"></div>
-                        <div class="seat-overlay" style="top: 50.5%; left: 74%;" onclick="toggleSeat(this, 5)"></div>
-
-                        <div class="seat-overlay" style="top: 64.5%; left: 6.5%;" onclick="toggleSeat(this, 10)"></div>
-                        <div class="seat-overlay" style="top: 64.5%; left: 51.5%;" onclick="toggleSeat(this, 9)"></div>
-                        <div class="seat-overlay" style="top: 64.5%; left: 74%;" onclick="toggleSeat(this, 8)"></div>
-
-                        <div class="seat-overlay" style="top: 78.5%; left: 6.5%;" onclick="toggleSeat(this, 14)"></div>
-                        <div class="seat-overlay" style="top: 78.5%; left: 29.5%;" onclick="toggleSeat(this, 13)"></div>
-                        <div class="seat-overlay" style="top: 78.5%; left: 51.5%;" onclick="toggleSeat(this, 12)"></div>
-                        <div class="seat-overlay" style="top: 78.5%; left: 74%;" onclick="toggleSeat(this, 11)"></div>
+                    <div id="innova-container" class="relative w-full max-w-[600px] mx-auto pb-4 hidden">
+                        <img src="kursi innova.png" alt="Denah Kursi Innova Reborn" class="w-full h-auto rounded-xl">
+                        
+                        <div class="seat-overlay" style="top: 32%; left: 21%; width: 22%; height: 15%;" onclick="toggleSeat(this, 1)"></div>
+                        
+                        <div class="seat-overlay" style="top: 54%; left: 21%; width: 18%; height: 13%;" onclick="toggleSeat(this, 2)"></div>
+                        <div class="seat-overlay" style="top: 54%; left: 41%; width: 18%; height: 13%;" onclick="toggleSeat(this, 3)"></div>
+                        <div class="seat-overlay" style="top: 54%; left: 61%; width: 18%; height: 13%;" onclick="toggleSeat(this, 4)"></div>
+                        
+                        <div class="seat-overlay" style="top: 72%; left: 29%; width: 20%; height: 14%;" onclick="toggleSeat(this, 5)"></div>
+                        <div class="seat-overlay" style="top: 72%; left: 51%; width: 20%; height: 14%;" onclick="toggleSeat(this, 6)"></div>
                     </div>
 
                     <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 mt-2">
@@ -233,6 +280,10 @@
                                 <span id="t-tanggal" class="font-bold block">-</span>
                                 <span id="t-jam" class="font-bold block">-</span>
                             </div>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-dashed border-slate-300 pb-2">
+                            <div class="flex items-center gap-2 text-slate-500 shrink-0"><i class="fas fa-car w-4 text-center"></i><span>Armada</span></div>
+                            <span id="t-armada" class="font-bold text-right flex-1 pl-2 break-words">-</span>
                         </div>
                         <div class="flex justify-between items-start border-b border-dashed border-slate-300 pb-2">
                             <div class="flex items-center gap-2 text-slate-500 shrink-0"><i class="fas fa-chair w-4 text-center"></i><span>Kursi</span></div>
@@ -317,6 +368,26 @@
             return selectedDate >= tuslahStart && selectedDate <= tuslahEnd;
         }
 
+        // FUNGSI GANTI ARMADA BERDASARKAN RADIO BUTTON
+        function changeArmada() {
+            // Ambil value dari radio button yang aktif/checked
+            const armada = document.querySelector('input[name="armada_radio"]:checked').value;
+            
+            document.getElementById('hiace-container').classList.add('hidden');
+            document.getElementById('innova-container').classList.add('hidden');
+
+            if (armada === 'HiAce') {
+                document.getElementById('hiace-container').classList.remove('hidden');
+            } else {
+                document.getElementById('innova-container').classList.remove('hidden');
+            }
+
+            // Reset kursi yang sudah dipilih saat ganti mobil
+            document.querySelectorAll('.seat-overlay.selected').forEach(el => el.classList.remove('selected'));
+            selectedSeats = [];
+            updateTotal();
+        }
+
         function calculatePrice() {
             const asal = document.getElementById('asal').value;
             const tujuan = document.getElementById('tujuan').value;
@@ -374,13 +445,14 @@
             document.getElementById('total-price').innerText = formatRupiah(selectedSeats.length * unitPrice);
         }
 
-        function generateTicket(nama, hp, asal, tujuan, tanggal, jam, jemput, antar, totalBayar) {
+        function generateTicket(nama, hp, asal, tujuan, tanggal, jam, armadaTeks, jemput, antar, totalBayar) {
             document.getElementById('t-nama').innerText = nama;
             document.getElementById('t-hp').innerText = hp;
             document.getElementById('t-asal').innerText = asal;
             document.getElementById('t-tujuan').innerText = tujuan;
             document.getElementById('t-tanggal').innerText = tanggal;
             document.getElementById('t-jam').innerText = jam;
+            document.getElementById('t-armada').innerText = armadaTeks;
             document.getElementById('t-jemput').innerText = jemput;
             document.getElementById('t-antar').innerText = antar;
             document.getElementById('t-kursi').innerText = `No. ${selectedSeats.join(', ')} (${selectedSeats.length} Seat)`;
@@ -437,6 +509,11 @@
             const tujuan = document.getElementById('tujuan').value;
             const tanggal = document.getElementById('tanggal').value;
             const jam = document.getElementById('jam').value;
+            
+            // Ambil dari input radio yang checked
+            const armadaVal = document.querySelector('input[name="armada_radio"]:checked').value;
+            const armadaTeks = armadaVal === 'HiAce' ? 'Toyota HiAce (14 Seat)' : 'Innova Reborn (6 Seat)';
+            
             const jemput = document.getElementById('alamat_jemput').value.trim();
             const antar = document.getElementById('alamat_antar').value.trim();
 
@@ -450,14 +527,15 @@
             }
 
             const totalBayar = formatRupiah(selectedSeats.length * unitPrice);
-            generateTicket(nama, hp, asal, tujuan, tanggal, jam, jemput, antar, totalBayar);
+            generateTicket(nama, hp, asal, tujuan, tanggal, jam, armadaTeks, jemput, antar, totalBayar);
 
-            let msg = `*PEMESANAN TIKET RESTA TRAVEL* 🚐\n`;
+            let msg = `*PEMESANAN TIKET MUDIK RESTA TRAVEL* 🚐\n`;
             msg += `----------------------------------\n`;
             msg += `👤 *Nama:* ${nama}\n`;
             msg += `📱 *No HP:* ${hp}\n`;
             msg += `📍 *Rute:* ${asal} ➡️ ${tujuan}\n`;
             msg += `📅 *Jadwal:* ${tanggal} | ${jam}\n`;
+            msg += `🚗 *Armada:* ${armadaTeks}\n`;
             msg += `💺 *Kursi:* No. ${selectedSeats.join(', ')} (${selectedSeats.length} Seat)\n`;
             msg += `💰 *Total:* ${totalBayar}\n`;
             msg += `----------------------------------\n`;
