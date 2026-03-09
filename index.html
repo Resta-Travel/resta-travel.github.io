@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16577786237"></script>
     <script>
@@ -10,7 +11,6 @@
       gtag('js', new Date());
       gtag('config', 'AW-16577786237');
     </script>
-    
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17301322208"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -22,24 +22,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Resta Travel - Executive HiAce Travel Palembang Lampung Jakarta Jambi</title>
-    <meta name="description" content="Booking tiket Resta Travel rute Palembang, Lampung, Jakarta, Jambi. Armada HiAce Executive 14 Seat. Antar jemput alamat, harga murah, fasilitas lengkap. E-Tiket instan.">
-    <meta name="keywords" content="travel palembang lampung, travel lampung palembang, travel palembang jakarta, travel lampung jakarta, travel palembang jambi, travel lampung jambi, travel jambi lampung, travel jambi palembang, sewa hiace palembang">
-    <meta name="robots" content="index, follow">
+    <title>Resta Travel - Executive HiAce Palembang Lampung Jakarta Jambi</title>
+    <meta name="description" content="Layanan travel Executive HiAce 14 Seat terpercaya. Melayani rute Palembang, Lampung, Jakarta, dan Jambi via Tol. Door to Door, aman, dan harga transparan.">
+    <meta name="keywords" content="travel palembang lampung, travel lampung palembang, travel jakarta palembang, travel palembang jakarta, travel lampung jambi, travel jambi lampung, sewa hiace palembang, travel executive sumatera">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    
+    <meta property="og:title" content="Resta Travel - Executive HiAce Antar Provinsi">
+    <meta property="og:description" content="Pesan tiket travel HiAce 14 Seat Door to Door rute Palembang, Lampung, Jakarta, Jambi via Tol.">
+    <meta property="og:image" content="https://restatravel.site/logo.png">
+    <meta property="og:url" content="https://restatravel.site/">
+    <meta property="og:type" content="website">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
         
         /* Glassmorphism Panel */
         .glass-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
         }
 
         /* Floating Chat Button */
@@ -57,18 +67,20 @@
         }
     </style>
 </head>
-<body class="text-slate-800">
+<body class="text-slate-800 antialiased selection:bg-blue-200 selection:text-blue-900">
 
     <nav class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-md">
-        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <a href="#" class="flex items-center">
-                <img src="Untitled project (11).png" alt="Resta Travel Logo" class="h-12 md:h-16 object-contain hover:scale-105 transition">
+                <img src="Untitled project (11).png" alt="Resta Travel Logo" class="h-12 md:h-14 object-contain hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/150x50?text=Resta+Travel'">
             </a>
             
             <div class="hidden md:flex items-center gap-8 font-medium text-slate-600">
                 <a href="#home" class="hover:text-blue-700 transition">Beranda</a>
+                <a href="#layanan" class="hover:text-blue-700 transition">Layanan</a>
+                <a href="#rute" class="hover:text-blue-700 transition">Rute Populer</a>
                 <a href="#booking" class="hover:text-blue-700 transition">Pesan Tiket</a>
-                <a href="https://wa.me/628127488437" target="_blank" class="flex items-center gap-2 text-green-600 font-semibold hover:text-green-700">
+                <a href="https://wa.me/628127488437" target="_blank" class="flex items-center gap-2 text-green-600 font-semibold hover:text-green-700 bg-green-50 px-4 py-2 rounded-full border border-green-200 transition">
                     <i class="fab fa-whatsapp text-xl"></i> Tanya Admin
                 </a>
             </div>
@@ -77,63 +89,180 @@
         </div>
     </nav>
 
-    <header id="home" class="relative min-h-[80vh] flex items-center justify-center pt-20">
+    <header id="home" class="relative min-h-[85vh] flex items-center justify-center pt-20 overflow-hidden">
         <div class="absolute inset-0 z-0">
             <img src="Gemini_Generated_Image_49lwcg49lwcg49lw.jpg" alt="Armada HiAce Resta Travel" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/50 to-slate-100"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-100"></div>
         </div>
 
-        <div class="container relative z-10 px-4 text-center mt-10">
-            <div class="inline-block px-4 py-1 mb-4 rounded-full bg-blue-600/30 border border-blue-400/50 backdrop-blur-sm text-blue-100 text-sm font-semibold tracking-wide">
-                ✨ OFFICIAL PARTNER PERJALANAN ANDA
+        <div class="container mx-auto relative z-10 px-4 text-center mt-10">
+            <div class="inline-block px-5 py-2 mb-6 rounded-full bg-blue-500/30 border border-blue-400/50 backdrop-blur-md text-blue-100 text-sm font-semibold tracking-wider">
+                <i class="fas fa-star text-yellow-400 mr-1"></i> PARTNER PERJALANAN TERPERCAYA
             </div>
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
-                Perjalanan Premium <br> Antar Kota Sumatera - Jawa
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-[1.2] drop-shadow-lg">
+                Perjalanan Premium <br> Lintas Sumatera & Jawa
             </h1>
-            <p class="text-lg text-slate-200 mb-8 max-w-2xl mx-auto drop-shadow-md">
-                Nikmati kenyamanan armada Toyota HiAce terbaru dengan layanan <i>Door to Door</i>. Rute Palembang, Lampung, Jakarta, dan Jambi.
+            <p class="text-lg md:text-xl text-slate-200 mb-10 max-w-3xl mx-auto font-light leading-relaxed drop-shadow-md">
+                Nikmati kenyamanan armada <strong>Toyota HiAce Executive 14 Seat</strong>. Lebih cepat via Tol Trans Sumatera dengan layanan <i>Door to Door</i> penjemputan langsung ke rumah Anda.
             </p>
-            <a href="#booking" class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-xl shadow-blue-900/30 hover:shadow-blue-600/40 hover:-translate-y-1 transition flex items-center gap-3 mx-auto w-fit">
-                <i class="fas fa-calendar-check"></i> Booking Sekarang
-            </a>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#booking" class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-xl shadow-blue-900/30 hover:shadow-blue-600/40 hover:-translate-y-1 transition flex items-center gap-3">
+                    <i class="fas fa-calendar-check"></i> Booking Tiket Sekarang
+                </a>
+                <a href="#rute" class="bg-white/10 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/20 transition">
+                    Lihat Rute Kami
+                </a>
+            </div>
         </div>
     </header>
 
-    <section id="booking" class="relative py-16 -mt-20 z-20 container mx-auto px-4">
-        <div class="glass-card rounded-3xl p-4 md:p-8 shadow-2xl">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-slate-800">Formulir Pemesanan Tiket</h2>
-                <p class="text-slate-500 mt-2">Pilih rute, jadwal, dan amankan kursi HiAce Anda di bawah ini.</p>
+    <section id="layanan" class="py-20 bg-white">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-16">
+                <span class="text-blue-600 font-bold tracking-wider text-sm uppercase">Standar Resta Travel</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 mt-2">Mengapa Memilih Kami?</h2>
+                <p class="text-slate-500 mt-3 max-w-2xl mx-auto">Kami tidak berkompromi soal kenyamanan. Berikut adalah fasilitas yang membuat perjalanan antarkota Anda tidak terasa melelahkan.</p>
             </div>
 
-            <iframe 
-                src="https://restatravel.site/form-pemesanan-tiket-travel" 
-                class="w-full h-[1400px] md:h-[950px] rounded-2xl bg-transparent" 
-                frameborder="0" 
-                scrolling="auto"
-                style="border:none;">
-            </iframe>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:border-blue-200 transition group text-center">
+                    <div class="w-16 h-16 mx-auto bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Layanan Door to Door</h3>
+                    <p class="text-slate-600 leading-relaxed">Sopir profesional kami akan menjemput Anda langsung di rumah dan mengantar tepat ke alamat tujuan. Bebas repot angkat koper ke terminal!</p>
+                </div>
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:border-blue-200 transition group text-center">
+                    <div class="w-16 h-16 mx-auto bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-car-side"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">100% HiAce Executive</h3>
+                    <p class="text-slate-600 leading-relaxed">Garansi penggunaan Toyota HiAce 14 Seat. Kabin luas, *legroom* lega, dan AC sentral super dingin merata hingga barisan belakang.</p>
+                </div>
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:border-blue-200 transition group text-center">
+                    <div class="w-16 h-16 mx-auto bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-road"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Lebih Cepat via Tol</h3>
+                    <p class="text-slate-600 leading-relaxed">Prioritas rute perjalanan menggunakan jalur Tol Trans Sumatera & Tol Trans Jawa untuk memangkas waktu tempuh secara drastis.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <a href="https://wa.me/628127488437" target="_blank" class="floating-chat bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110" title="Chat Admin">
-        <i class="fab fa-whatsapp text-3xl"></i>
-    </a>
-
-    <footer class="bg-slate-900 text-white py-12 border-t-4 border-blue-600">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="text-center md:text-left">
-                    <h3 class="text-2xl font-bold tracking-tight">Resta Travel</h3>
-                    <p class="text-slate-400 text-sm mt-2 max-w-xs">Solusi perjalanan aman, nyaman, dan terpercaya di Sumatera & Jawa.</p>
+    <section id="rute" class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800">Rute & Artikel Populer</h2>
+                    <p class="text-slate-500 mt-2">Temukan info jadwal, ongkos, dan rincian perjalanan secara lengkap.</p>
                 </div>
-                <div class="flex flex-col items-center md:items-end">
-                     <p class="text-slate-400 text-sm mb-2">Hubungi Kami:</p>
-                     <p class="text-xl font-bold text-white"><i class="fab fa-whatsapp text-green-500 mr-2"></i> 0812-7488-437</p>
+                <a href="#booking" class="text-blue-600 font-bold hover:text-blue-800 flex items-center gap-2">Pesan Tiket Langsung <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <a href="https://restatravel.site/travel-palembang-lampung" class="group bg-white rounded-2xl p-6 border border-slate-200 hover:border-blue-500 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl"><i class="fas fa-map-marker-alt"></i></div>
+                        <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded">Rute Utama</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition">Travel Palembang Lampung via Tol PP</h3>
+                    <p class="text-slate-500 text-sm">Cek info jadwal keberangkatan dan harga tiket reguler armada Executive HiAce.</p>
+                </a>
+
+                <a href="https://restatravel.site/travel-jakarta-palembang" class="group bg-white rounded-2xl p-6 border border-slate-200 hover:border-blue-500 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl"><i class="fas fa-ship"></i></div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition">Travel Jakarta Palembang Lintas Pulau</h3>
+                    <p class="text-slate-500 text-sm">Perjalanan tanpa transit via kapal penyeberangan. Harga All-in bebas biaya tambahan.</p>
+                </a>
+
+                <a href="https://restatravel.site/ongkos-travel-palembang-lampung" class="group bg-white rounded-2xl p-6 border border-slate-200 hover:border-blue-500 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl"><i class="fas fa-wallet"></i></div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition">Rincian Ongkos Travel Palembang Lampung</h3>
+                    <p class="text-slate-500 text-sm">Informasi harga transparan tanpa biaya tersembunyi. Ketahui fasilitas yang Anda dapatkan.</p>
+                </a>
+
+                <a href="https://restatravel.site/travel-lampung-jambi" class="group bg-white rounded-2xl p-6 border border-slate-200 hover:border-blue-500 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl"><i class="fas fa-road"></i></div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition">Travel Executive Lampung - Jambi PP</h3>
+                    <p class="text-slate-500 text-sm">Layanan antar provinsi rute tengah dengan armada HiAce luas berkapasitas 14 Seat.</p>
+                </a>
+
+                <a href="https://restatravel.site/harga-travel-palembang-lampung-2026" class="group bg-white rounded-2xl p-6 border border-slate-200 hover:border-blue-500 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl"><i class="fas fa-tags"></i></div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition">Update Harga Travel Terbaru 2026</h3>
+                    <p class="text-slate-500 text-sm">Ketahui *update* harga terbaru, jadwal 3 sesi pasti, dan cara pemesanan kursi secara online.</p>
+                </a>
+
+                <a href="https://restatravel.site/travel-mudik-lebaran-2026" class="group bg-orange-50 rounded-2xl p-6 border border-orange-200 hover:border-orange-500 hover:shadow-lg transition relative overflow-hidden">
+                    <div class="absolute -right-6 -top-6 text-orange-200 text-7xl opacity-50"><i class="fas fa-bullhorn"></i></div>
+                    <div class="flex justify-between items-start mb-4 relative z-10">
+                        <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center text-xl"><i class="fas fa-ticket-alt"></i></div>
+                        <span class="text-xs font-bold text-white bg-gradient-to-r from-orange-500 to-red-500 px-2 py-1 rounded shadow-md animate-pulse">Info Tuslah</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-orange-600 transition relative z-10">Tiket Mudik Lebaran 2026 (Semua Rute)</h3>
+                    <p class="text-slate-600 text-sm relative z-10">Amankan tiket mudik Anda. Cek informasi berlakunya tarif Tuslah dan ketersediaan kursi.</p>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="relative py-20 bg-blue-900 overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-blue-800 rounded-full blur-3xl opacity-50 -mr-20 -mt-20"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-800 rounded-full blur-3xl opacity-50 -ml-20 -mb-20"></div>
+
+        <div class="container mx-auto px-4 max-w-5xl relative z-10">
+            <div class="glass-card rounded-[2.5rem] p-4 md:p-10 shadow-2xl border-t-8 border-t-blue-400">
+                <div class="text-center mb-8 pt-4">
+                    <span class="bg-blue-100 text-blue-700 font-bold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 inline-block">Reservasi Online 24 Jam</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3">Booking Kursi & Pesan Tiket</h2>
+                    <p class="text-slate-500">Isi formulir, pilih rute, dan tentukan posisi kursi favorit Anda secara langsung.</p>
+                </div>
+
+                <div class="bg-white rounded-3xl overflow-hidden shadow-inner border border-slate-100">
+                    <iframe 
+                        src="https://restatravel.site/form-pemesanan-tiket-travel" 
+                        class="w-full h-[1400px] md:h-[950px] bg-transparent" 
+                        frameborder="0" 
+                        scrolling="auto"
+                        style="border:none;">
+                    </iframe>
                 </div>
             </div>
-            <div class="border-t border-slate-800 mt-8 pt-8 text-center text-slate-500 text-sm">
-                &copy; 2026 Resta Travel. All Rights Reserved.
+        </div>
+    </section>
+
+    <a href="https://wa.me/628127488437?text=Halo%20Admin%20Resta%20Travel,%20saya%20ingin%20tanya%20info%20travel." target="_blank" class="floating-chat bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110" aria-label="Chat Admin">
+        <i class="fab fa-whatsapp text-4xl"></i>
+    </a>
+
+    <footer class="bg-slate-950 text-white py-14 border-t-4 border-blue-600">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
+                <div class="text-center md:text-left flex-1">
+                    <img src="Untitled project (11).png" alt="Resta Travel" class="h-16 mb-4 mx-auto md:mx-0 object-contain brightness-0 invert opacity-90" onerror="this.src='https://via.placeholder.com/150x50?text=Resta+Travel'">
+                    <p class="text-slate-400 text-sm mt-2 max-w-xs mx-auto md:mx-0 leading-relaxed">Solusi perjalanan Executive darat antar provinsi. Mengutamakan keselamatan, kecepatan via Tol, dan kenyamanan VIP.</p>
+                </div>
+                <div class="flex flex-col items-center md:items-end flex-1">
+                     <p class="text-slate-400 text-sm font-semibold tracking-widest uppercase mb-3">Layanan Bantuan & Tiket</p>
+                     <a href="https://wa.me/628127488437" class="text-3xl font-extrabold text-white hover:text-green-400 transition-colors flex items-center gap-3">
+                         <i class="fab fa-whatsapp text-green-500"></i> 0812-7488-437
+                     </a>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 mt-10 pt-8 text-center text-slate-500 text-sm">
+                &copy; 2026 Resta Travel Executive. All Rights Reserved. <br>
+                Melayani dengan Hati, Mengantar dengan Aman.
             </div>
         </div>
     </footer>
